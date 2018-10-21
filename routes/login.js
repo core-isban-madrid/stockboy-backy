@@ -34,6 +34,7 @@ app.post('/', (req, res, next)=>{
             token: token,
             nombre: datos.nombre,
             rol: datos.rol,
+            validacion: datos.validacion,
             objectId: datos._id
         });
     });

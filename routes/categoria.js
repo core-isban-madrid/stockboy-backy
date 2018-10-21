@@ -21,7 +21,8 @@ app.get('/', (req, res, next)=>{
 app.post('/', (req, res)=>{
     var body = req.body;
     var categoria = new Categoria({
-        nombre: body.nombre
+        nombre: body.nombre,
+        especial: body.especial
     });
     categoria.save((err, categoriaGuardada)=>{
         if (err) {

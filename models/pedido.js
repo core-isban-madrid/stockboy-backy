@@ -6,7 +6,8 @@ var PedidoSchema = new mongoose.Schema({
     total: Number,
     fecha: Object,
     situacion: String,
-    fechaEnvio: Object
+    fechaEnvio: Object,
+    envio: String
 });
 
 module.exports = mongoose.model('Pedido', PedidoSchema);

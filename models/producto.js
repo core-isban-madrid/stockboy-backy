@@ -5,6 +5,8 @@ var ProductoSchema = new mongoose.Schema({
     nombre: String,
     marca: String,
     stock: Number,
+    online: Boolean,
+    vendidos: Number,
     categoriasSel: Array,
     descripcion: String,
     variantes: Array,

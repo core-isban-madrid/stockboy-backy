@@ -20,6 +20,22 @@ app.get('/', /*autenToken.verificarToken,*/ (req, res, next)=>{
     });
 });
 
+app.get('/clientes', /*autenToken.verificarToken,*/ (req, res, next)=>{
+    Usuario.find({rol:"Cliente"}).exec((err, usuarios)=>{
+        if(err){
+            return res.status(500).json({
+                ok: false,
+                mensaje: 'Error acceso Base de Datos',
+                errores: err
+            });
+        };
+        res.status(200).json({
+            ok: true,
+            usuarios: usuarios 
+        });
+    });
+});
+
 app.get('/:id', /*autenToken.verificarToken,*/ function(req, res, next){
     Usuario.findById(req.params.id, (err, usuario)=>{
         if(err){
@@ -41,7 +57,8 @@ app.post('/', /*autenToken.verificarToken,*/ function(req, res, next){
     var usuario = new Usuario({
         nombre: body.nombre,
         password: bcryptjs.hashSync(body.password, 10),
-        rol: body.rol
+        rol: body.rol,
+        validacion: body.validacion
     });
     usuario.save((err, usuarioGuardado)=>{ 
         if(err) {
@@ -72,6 +89,7 @@ app.put('/:id', /*autenToken.verificarToken,*/ (req, res, next)=>{
         usuario.nombre = body.nombre;
         usuario.email = body.email;
         usuario.rol = body.rol;
+        usuario.validacion = body.validacion;
         usuario.save((err, usuarioModificado)=>{
             if(err){
                 return res.status(400).json({

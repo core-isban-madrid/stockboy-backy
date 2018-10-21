@@ -5,7 +5,8 @@ var UsuarioSchema = new mongoose.Schema({
     nombre: String,
     password: String,
     rol: String,
-    perfil: Object
+    perfil: Object,
+    validacion: String,
 });
 
 // UsuarioSchema.plugin(unique, {message: 'Nombre de usuario ya se encuentra en uso'});

@@ -25,6 +25,7 @@ app.post('/', (req, res)=>{
         items: body.items,
         total: body.total,
         fecha: body.fecha,
+        envio: body.envio,
         situacion: body.situacion
     });
     pedido.save((err, pedidoGuardado)=>{
@@ -40,6 +41,23 @@ app.post('/', (req, res)=>{
             pedido: pedidoGuardado
         });
     }); 
+});
+
+app.get('/id/:id', (req, res, next)=>{
+    var id = req.params.id
+    Pedido.find({_id:id}).exec((err, pedidos)=>{
+        if(err){ 
+            return res.status(500).json({ 
+                ok: false,
+                mensaje: 'Error acceso Base de Datos',
+                errores: err
+            });
+        };
+        res.status(200).json({
+            ok: true,
+            pedidos: pedidos
+        });
+    });
 });
 
 app.get('/:id', function(req, res, next){
@@ -75,6 +93,7 @@ app.put('/:id', (req, res, next)=>{
         pedido.items = body.items;
         pedido.total = body.total;
         pedido.fecha = body.fecha;
+        pedido.envio = body.envio;
         pedido.situacion = body.situacion;
         pedido.fechaEnvio = body.fechaEnvio;
 
